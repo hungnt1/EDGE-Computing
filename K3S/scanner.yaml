@@ -1,0 +1,23 @@
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rpi-scan
+  namespace: default
+  labels:
+    app: rpi-scan
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: raspberrypi
+  containers:
+  - image: nguyenhungsync/rpi-scanner:latest
+    name: rpi-scan
+    env:
+      - name: PHYSICAL_AREA
+        value: "vn/hn/tranquochoan"
+      - name: SENSOR_ID
+        value: "rpi01"
+      - name: MQTT_SERVER
+        value: "emqx-service.default.svc.cluster.local"
+      - name: MQTT_PORT
+        value: "1883"
